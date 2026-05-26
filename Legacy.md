@@ -507,6 +507,5 @@ dir /s /b C:\root.txt
 
 flags:
 
-![image.png](%F0%9F%9F%A1%20Legacy%20%E2%80%94%20HTB%20%5BWindows%20XP%20%C2%B7%20Easy%5D/image.png)
-
-![image.png](%F0%9F%9F%A1%20Legacy%20%E2%80%94%20HTB%20%5BWindows%20XP%20%C2%B7%20Easy%5D/image%201.png)
+![flags](assets/image.png)
+![flags](assets/image%201.png)
