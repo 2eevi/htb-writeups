@@ -369,6 +369,5 @@ dir /s /b C:\user.txt
 dir /s /b C:\root.txt
 ```
 
-![image.png](%F0%9F%9F%A0%20Devel%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%5D/image.png)
-
-![image.png](%F0%9F%9F%A0%20Devel%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%5D/image%201.png)
+![flags](https://github.com/2eevi/htb-writeups/blob/main/Devel/assets/image.png)
+![flags](https://github.com/2eevi/htb-writeups/blob/main/Devel/assets/image1.png)
