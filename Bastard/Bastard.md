@@ -414,10 +414,10 @@ type C:\Users\Administrator\Desktop\root.txt
 
 flag user.txt
 
-![image.png](%F0%9F%91%B9%20Bastard%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%5D/image.png)
+![flags](https://github.com/2eevi/htb-writeups/blob/main/Bastard/assets/image.png)
 
 ,
 
 root.txt 
 
-![image.png](%F0%9F%91%B9%20Bastard%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%5D/image%201.png)
+![flags](https://github.com/2eevi/htb-writeups/blob/main/Bastard/assets/image1.png)
