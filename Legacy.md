@@ -507,5 +507,5 @@ dir /s /b C:\root.txt
 
 flags:
 
-![flags](assets/image.png)
-![flags](assets/image%201.png)
+![flags](https://raw.githubusercontent.com/2eevi/htb-writeups/main/Legacy/assets/image.png)
+![flags](https://raw.githubusercontent.com/2eevi/htb-writeups/main/Legacy/assets/image1.png)
