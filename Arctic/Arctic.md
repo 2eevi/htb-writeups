@@ -362,8 +362,8 @@ type C:\Users\Administrator\Desktop\root.txt
 
 y conseguimos el flag del user 
 
-![image.png](%E2%9D%84%EF%B8%8F%20Arctic%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%5D/image.png)
+![flags](https://github.com/2eevi/htb-writeups/blob/main/Arctic/assets/image.png)
 
 root flag:
 
-![image.png](%E2%9D%84%EF%B8%8F%20Arctic%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%5D/image%201.png)
+![flags](https://github.com/2eevi/htb-writeups/blob/main/Arctic/assets/image1.png)
