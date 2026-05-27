@@ -42,7 +42,7 @@ rpcclient $> enumdomgroups
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image.png)
 > 
 
 Funciona. Tenemos: `CascGuest`, `arksvc`, `s.smith`, `r.thompson`, `util`, `j.wakefield`, `s.hickson`, `j.goodhand`, `a.turnbull`, `e.crowe`, `b.hanson`, `d.burman`, `BackupSvc`, `j.allen`, `i.croft`. Todo sin una sola credencial.
@@ -61,14 +61,13 @@ cat ldap.txt | grep -iE "password|pwd|desc|info"
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%201.png)
+>![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image1.png)
 > 
 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%202.png)
-> 
+>![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image2.png)
 
 Eso no debería estar ahí. `cascadeLegacyPwd` no es un atributo nativo de AD — alguien lo creó para guardar contraseñas legacy y lo dejó visible sin autenticación.
 
@@ -80,7 +79,7 @@ echo -n "clk0bjVldmE=" | base64 -d
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%203.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image3.png)
 > 
 
 ## Validación con Kerbrute
@@ -94,7 +93,7 @@ kerbrute passwordspray -d cascade.local --dc 10.129.24.158 users.txt rY4n5eva
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%204.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image4.png)
 > 
 
 Confirmado: `r.thompson:rY4n5eva`.
@@ -112,7 +111,7 @@ smb: \IT\temp\s.smith\> ls
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%205.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image5.png)
 > 
 
 ```bash
@@ -123,7 +122,7 @@ cat "VNC Install.reg"
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%206.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image6.png)
 > 
 
 ---
@@ -143,13 +142,13 @@ msf > irb
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%207.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image7.png)
 > 
 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%208.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image8.png)
 > 
 
 Credencial: `s.smith:sT333ve2`.
@@ -161,7 +160,7 @@ evil-winrm -i 10.129.24.158 -u s.smith -p sT333ve2
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%209.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image9.png)
 > 
 
 ---
@@ -178,7 +177,7 @@ smb: \> ls
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2010.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image10.png)
 > 
 
 Ejecutable con nombre del dominio + DLL personalizada de cifrado. Merece análisis.
@@ -194,7 +193,7 @@ dotnet tool install -g ilspycmd --version 8.2.0.7535
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2011.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image11.png)
 > 
 
 ```bash
@@ -205,13 +204,13 @@ grep -i "password" codigo_fuente.cs
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2012.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image12.png)
 > 
 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2013.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image13.png)
 > 
 
 ## Obtener el ciphertext — Audit.db
@@ -228,13 +227,13 @@ sqlite> select * from ldap;
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2014.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image14.png)
 > 
 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2015.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image15.png)
 > 
 
 ## Parámetros AES por ingeniería inversa
@@ -244,19 +243,19 @@ Analizando el ensamblado `AesCrypto` encontramos los parámetros exactos:
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2016.png)
+>![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image16.png)
 > 
 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2017.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image17.png)
 > 
 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2018.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image18.png)
 > 
 
 Tenemos todo: AES-128-CBC, IV `1tdyjCbY1Ix49842`, clave `c4scadek3y654321`, ciphertext `BQO5l5Kj9MdErXx6Q6AGOw==`.
@@ -277,7 +276,7 @@ print(cipher.decrypt(ciphertext).decode('utf-8').strip())
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2019.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image19.png)
 > 
 
 Credencial: `arksvc:w3lc0meFr31nd`.
@@ -299,13 +298,13 @@ smb: \IT\Email Archives\> get Meeting_Notes_June_2018.html
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2020.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image20.png)
 > 
 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2021.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image21.png)
 > 
 
 Si TempAdmin fue eliminado con la Papelera de Reciclaje activa, el objeto sigue accesible con sus atributos.
@@ -317,13 +316,13 @@ Get-ADObject -Filter 'isDeleted -eq $true' -IncludeDeletedObjects -Properties *
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2022.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image22.png)
 > 
 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2023.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image23.png)
 > 
 
 ```bash
@@ -334,7 +333,7 @@ echo "YmFDVDNyMWFOMDBkbGVz" | base64 -d
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2024.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image24.png)
 > 
 
 ```bash
@@ -344,7 +343,7 @@ evil-winrm -i 10.129.24.158 -u Administrator -p baCT3r1aN00dles
 > 
 > 
 > 
-> ![image.png](%F0%9F%8C%8A%20Cascade%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Medium%20%C2%B7%20AD%5D/image%2025.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Cascade/assets/image25.png)
 > 
 
 ---
