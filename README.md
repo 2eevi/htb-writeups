@@ -8,4 +8,4 @@ This repository contains my personal notes and walkthroughs for over 65 HackTheB
 3. **Exploitation:** Developing/modifying exploits and gaining initial access.
 4. **Post-Exploitation:** Local enumeration and Privilege Escalation (Linux/Windows).
 
-*Note: No flags or spoilers are shared directly, only the educational path to the solution.*
+
